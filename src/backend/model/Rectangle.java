@@ -38,6 +38,14 @@ public class Rectangle extends Figure {
     }
 
     @Override
+    public void updateCoordinates(double diffX, double diffY) {
+        getTopLeft().changeX(diffX);
+        getBottomRight().changeX(diffX);
+        getTopLeft().changeY(diffY);
+        getBottomRight().changeY(diffY);
+    }
+
+    @Override
     public String toString() {
         return String.format("Rectángulo [ %s , %s ]", topLeft, bottomRight);
     }
