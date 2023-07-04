@@ -22,6 +22,16 @@ public class Ellipse extends Figure {
                 (Math.pow(eventPoint.getY() - getCenterPoint().getY(), 2) / Math.pow(getsMinorAxis(), 2))) <= 0.30;
     }
 
+    @Override
+    public void fill(GraphicsContext gc) {
+        gc.fillOval(getCenterPoint().getX() - (getsMayorAxis() / 2), getCenterPoint().getY() - (getsMinorAxis() / 2), getsMayorAxis(), getsMinorAxis());
+    }
+
+    @Override
+    public void stroke(GraphicsContext gc) {
+        gc.strokeOval(getCenterPoint().getX() - (getsMayorAxis() / 2), getCenterPoint().getY() - (getsMinorAxis() / 2), getsMayorAxis(), getsMinorAxis());
+    }
+
     public Point getCenterPoint() {
         return centerPoint;
     }
