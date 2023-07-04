@@ -18,6 +18,16 @@ public class Point {
     }
 
     @Override
+    public boolean equals(Object o){
+        if( o == this){
+            return true;
+        }
+        if(o instanceof Point){
+            return ((Point) o).getX()==x && ((Point) o).getY()==y;
+        }
+        return false;
+    }
+    @Override
     public String toString() {
         return String.format("{%.2f , %.2f}", x, y);
     }
