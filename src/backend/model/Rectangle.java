@@ -1,5 +1,7 @@
 package backend.model;
 
+import javafx.scene.canvas.GraphicsContext;
+
 public class Rectangle extends Figure {
 
     private final Point topLeft, bottomRight;
