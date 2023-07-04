@@ -50,4 +50,9 @@ public class Rectangle extends Figure {
         return String.format("Rectángulo [ %s , %s ]", topLeft, bottomRight);
     }
 
+    @Override
+    public Figure selected(Point startPoint, Point endPoint){
+        return new Rectangle(startPoint, endPoint);     
+    }
+
 }
