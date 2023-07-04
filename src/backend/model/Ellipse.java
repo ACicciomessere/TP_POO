@@ -34,6 +34,12 @@ public class Ellipse extends Figure {
         gc.strokeOval(getCenterPoint().getX() - (getsMayorAxis() / 2), getCenterPoint().getY() - (getsMinorAxis() / 2), getsMayorAxis(), getsMinorAxis());
     }
 
+    @Override
+    public void updateCoordinates(double diffX, double diffY) {
+        getCenterPoint().changeX(diffX);
+        getCenterPoint().changeY(diffY);
+    }
+
     public Point getCenterPoint() {
         return centerPoint;
     }
