@@ -1,6 +1,6 @@
 package backend.model;
 
-public class Rectangle implements Figure {
+public class Rectangle extends Figure {
 
     private final Point topLeft, bottomRight;
 
@@ -15,6 +15,12 @@ public class Rectangle implements Figure {
 
     public Point getBottomRight() {
         return bottomRight;
+    }
+
+    @Override
+    public boolean pointBelongs(Point eventPoint) {
+        return eventPoint.getX() > getTopLeft().getX() && eventPoint.getX() < getBottomRight().getX() &&
+                eventPoint.getY() > getTopLeft().getY() && eventPoint.getY() < getBottomRight().getY();
     }
 
     @Override
