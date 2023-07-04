@@ -13,7 +13,7 @@ public abstract class Figure implements Drawing {
     public abstract void fill(GraphicsContext gc);
     public abstract void stroke(GraphicsContext gc);
     public abstract void updateCoordinates(double diffX, double diffY);
-    public abstract void selected(Figure figure); //Para mejorar el codigo de PaintPane con los else if
+    public abstract Figure selected(Point startPoint, Point endPoint); //Para mejorar el codigo de PaintPane con los else if
 
     public Color getBorderColor() {
         return borderColor;
