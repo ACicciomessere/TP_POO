@@ -4,7 +4,7 @@ import backend.model.Figure;
 
 import java.awt.*;
 
-public class changeBorderColor implements Action {
+public class changeBorderColor implements ActionAbsImpl {
     private final Color previousColor;
     private final Color nextColor;
 
