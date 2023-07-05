@@ -8,7 +8,6 @@ import java.util.*;
 public class CanvasState {
     private final Set<Layer> checkedLayers = new TreeSet<>(); // Coleccion para almacenar las layers
     private final Map<Layer, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
-    private ExecuteUndoAction doUndo;
     
     public void addFigure(Layer layer, Figure figure) {
         if(layer == null) {
@@ -26,7 +25,6 @@ public class CanvasState {
 
     public void deleteFigure(Figure figure) {
         layersFigures.get(figure.getLayer()).remove(figure);
-        doUndo.addUndo(figure);
     }
 
     public void activateLayer(Layer layer) {
