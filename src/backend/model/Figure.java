@@ -20,8 +20,8 @@ public abstract class Figure implements Drawing {
         this.layer = layer;
     }
 
-    public String getLayer(){
-        return this.layer.getName();
+    public Layer getLayer(){
+        return this.layer;
     }
     public Color getBorderColor() {
         return borderColor;
