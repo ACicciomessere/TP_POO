@@ -11,7 +11,7 @@ public class CanvasState {
 
     private final List<Figure> list = new ArrayList<>();
 
-    private Map<String, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
+    private final Map<String, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
 
     public void addFigure(String layer, Figure figure) {
         if(layer == null) {
