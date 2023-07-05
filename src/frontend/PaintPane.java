@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ChoiceBox;
+
 
 public class PaintPane extends BorderPane {
 
