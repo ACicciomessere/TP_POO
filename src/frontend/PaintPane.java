@@ -54,6 +54,14 @@ public class PaintPane extends BorderPane {
 	CheckBox layer2 = new CheckBox("Layer 2");
 	CheckBox layer3 = new CheckBox("Layer 3");
 
+	Label variable1 = new Label();
+	Label variable2 = new Label();
+	Label variable3 = new Label();
+	Label variable4 = new Label();
+
+	ToggleButton deshacerButton = new ToggleButton("Deshacer");
+	ToggleButton rehacerButton = new ToggleButton("Rehacer");
+
 	// Dibujar una figura
 	Point startPoint;
 
@@ -90,6 +98,18 @@ public class PaintPane extends BorderPane {
 		checkBox.setPrefHeight(25);
 		checkBox.setPrefWidth(600);
 		checkBox.setAlignment(Pos.CENTER);
+		
+		HBox doUndo = new HBox();
+		Label[] variables1 = {variable1, variable2};
+		Label[] variables2 = {variable3, variable4};
+		ToggleButton[] Buttons = {deshacerButton, rehacerButton};
+		doUndo.getChildren().addAll(variables1);
+		doUndo.getChildren().addAll(Buttons);
+		doUndo.getChildren().addAll(variables2);
+		doUndo.setStyle("-fx-background-color: #999");
+		doUndo.setPrefHeight(35);
+		doUndo.setPrefWidth(600);
+		doUndo.setAlignment(Pos.CENTER);
 
 		layerChoiceBox.getItems().addAll("Layer 1", "Layer 2", "Layer 3");
 
@@ -195,7 +215,7 @@ public class PaintPane extends BorderPane {
 				redrawCanvas();
 			}
 		});
-
+		setTop(doUndo);
 		setLeft(buttonsBox);
 		setRight(canvas);
 		setBottom(checkBox);
