@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.HBox;
 
 
 public class PaintPane extends BorderPane {
@@ -194,6 +195,7 @@ public class PaintPane extends BorderPane {
 
 		setLeft(buttonsBox);
 		setRight(canvas);
+		setBottom(checkBox);
 	}
 
 	void redrawCanvas() {
