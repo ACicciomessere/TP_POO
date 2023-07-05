@@ -7,17 +7,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaintPane extends BorderPane {
 
@@ -43,6 +40,7 @@ public class PaintPane extends BorderPane {
 	// Botones para manipular la configuracion del borde y relleno
 	Label borderLabel = new Label("Borde");
 	Slider borderSlider = new Slider(1, 50, 25);
+
 	ColorPicker borderColorPicker = new ColorPicker();
 
 	Label fillLabel = new Label("Relleno");
@@ -55,7 +53,7 @@ public class PaintPane extends BorderPane {
 	CheckBox layer1 = new CheckBox("Layer 1");
 	CheckBox layer2 = new CheckBox("Layer 2");
 	CheckBox layer3 = new CheckBox("Layer 3");
-	
+
 	// Dibujar una figura
 	Point startPoint;
 
@@ -93,11 +91,14 @@ public class PaintPane extends BorderPane {
 		checkBox.setPrefWidth(600);
 		checkBox.setAlignment(Pos.CENTER);
 
-
 		layerChoiceBox.getItems().addAll("Layer 1", "Layer 2", "Layer 3");
 
 		borderSlider.setShowTickLabels(true);
 		borderSlider.setShowTickMarks(true);
+
+		layer1.setOnAction(event -> handleCheckBoxAction(layer1, "Layer 1"));
+        	layer2.setOnAction(event -> handleCheckBoxAction(layer2, "Layer 2"));
+        	layer3.setOnAction(event -> handleCheckBoxAction(layer3, "Layer 3"));
 
 		canvas.setOnMousePressed(event -> {
 			startPoint = new Point(event.getX(), event.getY());
@@ -129,7 +130,7 @@ public class PaintPane extends BorderPane {
 			} else {
 				return ;
 			}
-			canvasState.addFigure(newFigure);
+			canvasState.addFigure(layerChoiceBox.getValue(), newFigure);
 			startPoint = null;
 			redrawCanvas();
 		});
@@ -138,7 +139,7 @@ public class PaintPane extends BorderPane {
 			Point eventPoint = new Point(event.getX(), event.getY());
 			boolean found = false;
 			StringBuilder label = new StringBuilder();
-			for(Figure figure : canvasState.figures()) {
+			for(Figure figure : canvasState.figures(checkedLayers)) {
 				if(figureBelongs(figure, eventPoint)) {
 					found = true;
 					label.append(figure.toString());
@@ -156,7 +157,7 @@ public class PaintPane extends BorderPane {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				boolean found = false;
 				StringBuilder label = new StringBuilder("Se seleccionó: ");
-				for (Figure figure : canvasState.figures()) {
+				for (Figure figure : canvasState.figures(checkedLayers)) {
 					if(figureBelongs(figure, eventPoint)) {
 						found = true;
 						selectedFigure = figure;
@@ -198,9 +199,20 @@ public class PaintPane extends BorderPane {
 		setBottom(checkBox);
 	}
 
+	private List<String> checkedLayers = new ArrayList<>();
+
+	private void handleCheckBoxAction(CheckBox checkBox, String layer) {
+		if (checkBox.isSelected()) {
+			checkedLayers.add(layer);
+		} else {
+			checkedLayers.remove(layer);
+		}
+		redrawCanvas();
+	}
+
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		for(Figure figure : canvasState.figures()) {
+		for(Figure figure : canvasState.figures(checkedLayers)) {
 			if(figure == selectedFigure) {
 				gc.setStroke(Color.RED);
 			} else {
