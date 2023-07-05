@@ -45,10 +45,11 @@ public class PaintPane extends BorderPane {
 
 	Label layerLabel = new Label("Capa");
 
-	Label variable1 = new Label();
-	Label variable2 = new Label();
-	Label variable3 = new Label();
-	Label variable4 = new Label();
+	//Etiquetas con los nombres de las acciones y la cantidad de elementos que hay para hacer y deshacer
+	Label textoIzquierda = new Label();
+	Label valorIzquierda = new Label();
+	Label textoDerecha = new Label();
+	Label valorDerecha = new Label();
 
 	ToggleButton deshacerButton = new ToggleButton("Deshacer");
 	ToggleButton rehacerButton = new ToggleButton("Rehacer");
@@ -108,12 +109,12 @@ public class PaintPane extends BorderPane {
 		checkBox.setAlignment(Pos.CENTER);
 
 		HBox doUndo = new HBox();
-		Label[] variables1 = {variable1, variable2};
-		Label[] variables2 = {variable3, variable4};
+		Label[] varsIzquierda = {textoIzquierda, valorIzquierda};
+		Label[] varsDerecha = {textoDerecha, valorDerecha};
 		ToggleButton[] Buttons = {deshacerButton, rehacerButton};
-		doUndo.getChildren().addAll(variables1);
+		doUndo.getChildren().addAll(varsIzquierda);
 		doUndo.getChildren().addAll(Buttons);
-		doUndo.getChildren().addAll(variables2);
+		doUndo.getChildren().addAll(varsDerecha);
 		doUndo.setStyle("-fx-background-color: #999");
 		doUndo.setPrefHeight(35);
 		doUndo.setPrefWidth(600);
