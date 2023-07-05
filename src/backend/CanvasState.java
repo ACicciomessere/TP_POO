@@ -27,6 +27,17 @@ public class CanvasState {
         layersFigures.get(figure.getLayer()).remove(figure);
     }
 
+    public Figure findFigure(Figure figure){
+        for(Layer layer : layersFigures.keySet()){
+            for(int i = 0; i < layersFigures.get(layer).size(); i++){
+                if(layersFigures.get(layer)[i].equals(figure)){
+                    return figure;
+                }
+            }
+        }
+        throw new NoSuchElementException("Figure not found");
+    }
+
     public void activateLayer(Layer layer) {
         if(checkedLayers.contains(layer)) {
             layer.activate();
