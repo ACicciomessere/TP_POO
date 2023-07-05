@@ -13,8 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class PaintPane extends BorderPane {
 
@@ -96,9 +96,11 @@ public class PaintPane extends BorderPane {
 		borderSlider.setShowTickLabels(true);
 		borderSlider.setShowTickMarks(true);
 
+		//Array de layers en el que se actualiza al checkear un box
+
 		layer1.setOnAction(event -> handleCheckBoxAction(layer1, "Layer 1"));
-        	layer2.setOnAction(event -> handleCheckBoxAction(layer2, "Layer 2"));
-        	layer3.setOnAction(event -> handleCheckBoxAction(layer3, "Layer 3"));
+        layer2.setOnAction(event -> handleCheckBoxAction(layer2, "Layer 2"));
+        layer3.setOnAction(event -> handleCheckBoxAction(layer3, "Layer 3"));
 
 		canvas.setOnMousePressed(event -> {
 			startPoint = new Point(event.getX(), event.getY());
@@ -118,10 +120,10 @@ public class PaintPane extends BorderPane {
 			}
 			else if(circleButton.isSelected()) {
 				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new Circle(layerChoiceBox.getValue(),startPoint, circleRadius);
+				newFigure = new Circle(layerChoiceBox.getValue(), startPoint, circleRadius);
 			} else if(squareButton.isSelected()) {
 				double size = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new Square(layerChoiceBox.getValue(),startPoint, size);
+				newFigure = new Square(layerChoiceBox.getValue(), startPoint, size);
 			} else if(ellipseButton.isSelected()) {
 				Point centerPoint = new Point(Math.abs(endPoint.getX() + startPoint.getX()) / 2, (Math.abs((endPoint.getY() + startPoint.getY())) / 2));
 				double sMayorAxis = Math.abs(endPoint.getX() - startPoint.getX());
@@ -199,7 +201,7 @@ public class PaintPane extends BorderPane {
 		setBottom(checkBox);
 	}
 
-	private List<String> checkedLayers = new ArrayList<>();
+	private Set<String> checkedLayers = new TreeSet<>();
 
 	private void handleCheckBoxAction(CheckBox checkBox, String layer) {
 		if (checkBox.isSelected()) {
