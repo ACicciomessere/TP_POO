@@ -12,7 +12,7 @@ public class MakeActionForCircle extends MakeActionForFigure{
     public MakeActionForCircle(Point start, MouseEvent event, GraphicsContext gc, CanvasState canvasState, Color borderColor, Color fillingColor, double width){
         super(canvasState);
         double radius = Math.abs(event.getX() - start.getX());
-        setManipulableFigure(new DrawnCircle(start, radius, gc));
+        setManipulableFigure(new DrawnCircle(layer, start, radius, gc));
         manipulableFigure.formatFigure(borderColor, fillingColor, width);
     }
 

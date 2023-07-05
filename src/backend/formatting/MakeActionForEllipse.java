@@ -13,7 +13,7 @@ public class MakeActionForEllipse extends MakeActionForFigure{
         Point center = new Point ((Math.abs(event.getX() + start.getX()))/2, (Math.abs((event.getY() + start.getY())))/2);
         double sMayorAxis = Math.abs(event.getX() - start.getX());
         double sMinorAxis = Math.abs(event.getY() - start.getY());
-        setManipulableFigure(new DrawnEllipse(center, sMayorAxis, sMinorAxis, gc));
+        setManipulableFigure(new DrawnEllipse(layer, center, sMayorAxis, sMinorAxis, gc));
         manipulableFigure.formatFigure(borderColor, fillingColor, width);
     }
 

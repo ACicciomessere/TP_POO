@@ -1,5 +1,11 @@
 package backend.formatting;
 
+import backend.model.Figure;
+
+import javax.swing.*;
+import java.util.Deque;
+import java.util.LinkedList;
+
 public abstract class ExecuteUndoAction {
 
     private final Deque<Action> undo = new LinkedList<>();
