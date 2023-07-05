@@ -1,11 +1,12 @@
 package backend.model;
 
-public class Circle extends Ellipse {
+public abstract class Circle extends Ellipse {
     private final double radius;
-
+    private static final String TYPE = "Circle";
     public Circle(Point centerPoint, double radius) {
         super(centerPoint, 2 * radius, 2 * radius); // Revisar si esto esta bien
         this.radius = radius;
+        this.figureName=TYPE;
     }
 
     @Override

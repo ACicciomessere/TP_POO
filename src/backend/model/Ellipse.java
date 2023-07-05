@@ -2,8 +2,9 @@ package backend.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Ellipse extends Figure {
+public abstract class Ellipse extends Figure {
 
+    private static final String TYPE = "Ellipse";
     private final Point centerPoint;
     private final double sMayorAxis, sMinorAxis;
 
@@ -11,6 +12,7 @@ public class Ellipse extends Figure {
         this.centerPoint = centerPoint;
         this.sMayorAxis = sMayorAxis;
         this.sMinorAxis = sMinorAxis;
+        this.figureName=TYPE;
     }
 
     @Override

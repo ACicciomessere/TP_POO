@@ -2,13 +2,14 @@ package backend.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Rectangle extends Figure {
+public abstract class Rectangle extends Figure {
 
     private final Point topLeft, bottomRight;
-
+    private static final String TYPE = "Rectangle";
     public Rectangle(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
+        this.figureName=TYPE;
     }
 
     public Point getTopLeft() {

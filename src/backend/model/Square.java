@@ -1,8 +1,10 @@
 package backend.model;
 
-public class Square extends Rectangle {
+public abstract class Square extends Rectangle {
+    private static final String TYPE = "Square";
     public Square(Point topLeft, double size) {
         super(topLeft, new Point(topLeft.getX() + size, topLeft.getY() + size));
+        this.figureName=TYPE;
     }
 
     @Override
