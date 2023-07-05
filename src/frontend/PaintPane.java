@@ -41,6 +41,8 @@ public class PaintPane extends BorderPane {
 	// Botones para manipular la configuracion del borde y relleno
 	Label borderLabel = new Label("Borde");
 	Slider borderSlider = new Slider(1, 50, 25);
+	borderSlider.setShowTickLabels(true);
+	borderSlider.setShowTickMarks(true);
 	ColorPicker borderColorPicker = new ColorPicker();
 
 	Label fillLabel = new Label("Relleno");
