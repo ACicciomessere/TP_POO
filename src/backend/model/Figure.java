@@ -9,18 +9,19 @@ public abstract class Figure implements Drawing {
     private Color fillingColor;
     private Color borderColor;
     private double borderWidth;
-    private String layer;
+    private Layer layer;
+    
     public abstract boolean pointBelongs(Point eventPoint);
     public abstract void fill(GraphicsContext gc);
     public abstract void stroke(GraphicsContext gc);
     public abstract void updateCoordinates(double diffX, double diffY);
 
-    public Figure(String layer){
+    public Figure(Layer layer){
         this.layer = layer;
     }
 
     public String getLayer(){
-        return this.layer;
+        return this.layer.getName();
     }
     public Color getBorderColor() {
         return borderColor;
