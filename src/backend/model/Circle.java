@@ -19,12 +19,6 @@ public class Circle extends Ellipse {
                 Math.pow(getCenterPoint().getY() - eventPoint.getY(), 2)) < getRadius();
     }
 
-    @Override
-     public Figure selected(Point startPoint, Point endPoint){
-         double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-		 return new Circle(startPoint, circleRadius);
-     }
-
     public double getRadius() {
         return radius;
     }
