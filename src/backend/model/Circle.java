@@ -3,7 +3,7 @@ package backend.model;
 public abstract class Circle extends Ellipse {
     private final double radius;
     private static final String TYPE = "Circle";
-    public Circle(String layer, Point centerPoint, double radius) {
+    public Circle(Layer layer, Point centerPoint, double radius) {
         super(layer, centerPoint, 2 * radius, 2 * radius); // Revisar si esto esta bien
         this.radius = radius;
         this.figureName=TYPE;
