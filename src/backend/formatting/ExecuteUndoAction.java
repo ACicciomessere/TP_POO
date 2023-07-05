@@ -1,11 +1,11 @@
 package backend.formatting;
 
-public interface ExecuteUndoAction {
-    
+public abstract class ExecuteUndoAction {
+
     private final LinkedList<Figure> undo = new LinkedList<>();
     private final LinkedList<Figure> redo = new LinkedList<>();
 
-
+    
     public void addUndo(Figure figure){
         undo.add(figure);
     }
@@ -30,4 +30,8 @@ public interface ExecuteUndoAction {
         return redo.size();
     }
 
+    public abstract void activateAction();
+    
+    public abstract void undoAction();
+    
 }
