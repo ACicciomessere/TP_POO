@@ -6,7 +6,8 @@ public abstract class Rectangle extends Figure {
 
     private final Point topLeft, bottomRight;
     private static final String TYPE = "Rectangle";
-    public Rectangle(Point topLeft, Point bottomRight) {
+    public Rectangle(String layer, Point topLeft, Point bottomRight) {
+        super(layer);
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
         this.figureName=TYPE;
