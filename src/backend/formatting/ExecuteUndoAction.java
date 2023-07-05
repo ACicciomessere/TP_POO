@@ -1,21 +1,21 @@
 package backend.formatting;
 
-public abstract class ExecuteUndoAction {
-
-    private final LinkedList<Action> undo = new LinkedList<>();
-    private final LinkedList<Action> redo = new LinkedList<>();
-
+public interface ExecuteUndoAction {
     
-    public void addUndo(Action action){
-        undo.add(action);
+    private final LinkedList<Figure> undo = new LinkedList<>();
+    private final LinkedList<Figure> redo = new LinkedList<>();
+
+
+    public void addUndo(Figure figure){
+        undo.add(figure);
     }
 
     public Figure undo(){
         return undo.pollLast();
     }
 
-    public void addRedo(Action action){
-        redo.add(action);
+    public void addRedo(Figure figure){
+        redo.add(figure);
     }
 
     public Figure redo(){
@@ -30,8 +30,4 @@ public abstract class ExecuteUndoAction {
         return redo.size();
     }
 
-    public abstract void activateAction();
-    
-    public abstract void undoAction();
-    
 }
