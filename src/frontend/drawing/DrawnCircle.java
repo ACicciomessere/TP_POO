@@ -2,15 +2,16 @@ package frontend.drawing;
 
 import backend.model.Circle;
 import backend.model.Figure;
+import backend.model.Layer;
 import backend.model.Point;
 import javafx.scene.canvas.GraphicsContext;
 
 public class DrawnCircle extends Circle {
-
+    private Layer layer;
     private final GraphicsContext gc;
 
-    public DrawnCircle(Point center, double radius, GraphicsContext gc){
-        super(center, radius);
+    public DrawnCircle(Layer layer, Point center, double radius, GraphicsContext gc){
+        super(layer, center, radius);
         this.gc=gc;
     }
     @Override
@@ -22,6 +23,6 @@ public class DrawnCircle extends Circle {
 
     @Override
     public Figure duplicateFigure(Point figureCenter) {
-        return new DrawnCircle(figureCenter, getRadius(), gc);
+        return new DrawnCircle(layer, figureCenter, getRadius(), gc);
     }
 }

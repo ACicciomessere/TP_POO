@@ -17,6 +17,14 @@ public class Point {
         return y;
     }
 
+    public double xDistance(Point other){
+        return other.getX()-x;
+    }
+
+    public double yDistance(Point other){
+        return other.getY()-x;
+    }
+
     @Override
     public boolean equals(Object o){
         if( o == this){

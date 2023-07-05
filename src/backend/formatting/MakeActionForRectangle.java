@@ -12,7 +12,7 @@ public class MakeActionForRectangle extends MakeActionForFigure{
 
     public MakeActionForRectangle(Point start, MouseEvent event, GraphicsContext gc, CanvasState canvasState, Color borderColor, Color fillingColor, double width){
         super(canvasState);
-        setManipulableFigure(new DrawnRectangle);
+        setManipulableFigure(new DrawnRectangle(layer, start, new Point(event.getX(), event.getY()), gc));
         manipulableFigure.formatFigure(borderColor, fillingColor, width);
     }
 

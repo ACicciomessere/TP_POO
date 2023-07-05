@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Rectangle extends Figure {
 
-    private final Point topLeft, bottomRight;
+    private Point topLeft, bottomRight;
     private static final String TYPE = "Rectangle";
     public Rectangle(Layer layer, Point topLeft, Point bottomRight) {
         super(layer);
@@ -19,6 +19,11 @@ public abstract class Rectangle extends Figure {
 
     public Point getBottomRight() {
         return bottomRight;
+    }
+
+    public void moveRectangle(double diffX, double diffY){
+        this.topLeft = new Point(topLeft.getX() + diffX, topLeft.getY() + diffY);
+        this.bottomRight = new Point(bottomRight.getX() + diffX, bottomRight.getY() + diffY);
     }
 
     @Override
