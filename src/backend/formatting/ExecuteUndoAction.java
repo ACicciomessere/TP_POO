@@ -2,8 +2,8 @@ package backend.formatting;
 
 public abstract class ExecuteUndoAction {
 
-    private final LinkedList<Action> undo = new LinkedList<>();
-    private final LinkedList<Action> redo = new LinkedList<>();
+    private final Deque<Action> undo = new LinkedList<>();
+    private final Deque<Action> redo = new LinkedList<>();
 
     
     public void addUndo(Action action){
