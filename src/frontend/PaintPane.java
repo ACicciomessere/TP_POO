@@ -201,7 +201,7 @@ public class PaintPane extends BorderPane {
 		setBottom(checkBox);
 	}
 
-	private Set<String> checkedLayers = new TreeSet<>();
+	private final Set<String> checkedLayers = new TreeSet<>();
 
 	private void handleCheckBoxAction(CheckBox checkBox, String layer) {
 		if (checkBox.isSelected()) {
