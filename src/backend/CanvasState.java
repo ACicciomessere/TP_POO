@@ -8,6 +8,8 @@ import java.util.*;
 public class CanvasState {
     private final Set<Layer> checkedLayers = new TreeSet<>(); // Coleccion para almacenar las layers
     private final Map<Layer, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
+    private final Deque<Action> undo = new LinkedList<>(); //Lista para guardar las acciones anteriores
+    private final Deque<Action> redo = new LinkedList<>(); //Lista para re hacer lo deshecho
     
     public void addFigure(Layer layer, Figure figure) {
         if(layer == null) {
