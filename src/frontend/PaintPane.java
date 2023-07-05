@@ -49,6 +49,10 @@ public class PaintPane extends BorderPane {
 	Label layerLabel = new Label("Capa");
 
 	ChoiceBox<String> layerChoiceBox = new ChoiceBox<>();
+
+	CheckBox layer1 = new CheckBox("Layer 1");
+	CheckBox layer2 = new CheckBox("Layer 2");
+	CheckBox layer3 = new CheckBox("Layer 3");
 	
 	// Dibujar una figura
 	Point startPoint;
@@ -76,6 +80,17 @@ public class PaintPane extends BorderPane {
 		buttonsBox.setStyle("-fx-background-color: #999");
 		buttonsBox.setPrefWidth(100);
 		gc.setLineWidth(1);
+
+		CheckBox[] checkBoxes = {layer1, layer2, layer3};
+		HBox checkBox = new HBox();
+		Label layers = new Label("Mostrar Capas: ");
+		checkBox.getChildren().add(layers);
+		checkBox.getChildren().addAll(checkBoxes);
+		checkBox.setStyle("-fx-background-color: #999");
+		checkBox.setPrefHeight(25);
+		checkBox.setPrefWidth(600);
+		checkBox.setAlignment(Pos.CENTER);
+
 
 		layerChoiceBox.getItems().addAll("Layer 1", "Layer 2", "Layer 3");
 
