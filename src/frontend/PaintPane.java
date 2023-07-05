@@ -146,19 +146,19 @@ public class PaintPane extends BorderPane {
 			}
 			Figure newFigure = null;
 			if(rectangleButton.isSelected()) {
-				newFigure = new Rectangle(layerChoiceBox.getValue().getName(), startPoint, endPoint);
+				newFigure = new Rectangle(layerChoiceBox.getValue(), startPoint, endPoint);
 			}
 			else if(circleButton.isSelected()) {
 				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new Circle(layerChoiceBox.getValue().getName(), startPoint, circleRadius);
+				newFigure = new Circle(layerChoiceBox.getValue(), startPoint, circleRadius);
 			} else if(squareButton.isSelected()) {
 				double size = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new Square(layerChoiceBox.getValue().getName(), startPoint, size);
+				newFigure = new Square(layerChoiceBox.getValue(), startPoint, size);
 			} else if(ellipseButton.isSelected()) {
 				Point centerPoint = new Point(Math.abs(endPoint.getX() + startPoint.getX()) / 2, (Math.abs((endPoint.getY() + startPoint.getY())) / 2));
 				double sMayorAxis = Math.abs(endPoint.getX() - startPoint.getX());
 				double sMinorAxis = Math.abs(endPoint.getY() - startPoint.getY());
-				newFigure = new Ellipse(layerChoiceBox.getValue().getName(), centerPoint, sMayorAxis, sMinorAxis);
+				newFigure = new Ellipse(layerChoiceBox.getValue(), centerPoint, sMayorAxis, sMinorAxis);
 			} else {
 				return ;
 			}
@@ -243,7 +243,7 @@ public class PaintPane extends BorderPane {
 		redrawCanvas();
 	}
 
-	void redrawCanvas() {
+	private void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures()) {
 			if(figure == selectedFigure) {
@@ -261,3 +261,4 @@ public class PaintPane extends BorderPane {
 		return figure.pointBelongs(eventPoint);
 	}
 }
+
