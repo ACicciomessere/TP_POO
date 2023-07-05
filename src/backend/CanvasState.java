@@ -1,40 +1,52 @@
 package backend;
 
 import backend.model.Figure;
+import backend.model.Layer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CanvasState {
+    private final Set<Layer> checkedLayers = new TreeSet<>(); // Coleccion para almacenar las layers
+    private final Map<Layer, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
 
-    private final List<Figure> list = new ArrayList<>();
-
-    private final Map<String, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
-
-    public void addFigure(String layer, Figure figure) {
+    public void addFigure(Layer layer, Figure figure) {
         if(layer == null) {
             throw new IllegalArgumentException("Selecciona una capa"); // Aca hay que poner un alert de seleccionar una capa
-        }
-        if(!layersFigures.containsKey(layer)) {
-            layersFigures.put(layer, new ArrayList<>());
-        }
+        } // En principio esto se puede sacar, pues no habria que validarlo
         layersFigures.get(layer).add(figure);
-        list.add(figure);
+    }
+
+    public Layer addCheckedLayer() {
+        Layer aux = new Layer();
+        checkedLayers.add(aux);
+        layersFigures.put(aux, new ArrayList<>());
+        return aux;
     }
 
     public void deleteFigure(Figure figure) {
-        list.remove(figure);
+        layersFigures.get(figure.getLayer()).remove(figure);
     }
 
-    public Iterable<Figure> figures(List<String> layers) {
+    public void activateLayer(Layer layer) {
+        if(checkedLayers.contains(layer)) {
+            layer.activate();
+        }
+    }
+    
+    public void deactivateLayer(Layer layer) {
+        if(checkedLayers.contains(layer)) {
+            layer.deactivate();
+        }
+    }
+
+    public Iterable<Figure> figures() {
         List<Figure> toReturn = new ArrayList<>();
-        for(String layer : layers) {
-            if(layersFigures.containsKey(layer)) {
+        for(Layer layer : checkedLayers) {
+            if(layer.isActivated()) {
                 toReturn.addAll(layersFigures.get(layer));
             }
         }
         return toReturn;
     }
 }
+
