@@ -1,17 +1,21 @@
 package frontend;
 
 import backend.CanvasState;
-import backend.formatting.MakeActionForCircle;
-import backend.formatting.MakeActionForFigure;
 import backend.model.*;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.*;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ChoiceBox;
+
 
 public class PaintPane extends BorderPane {
 
@@ -23,7 +27,6 @@ public class PaintPane extends BorderPane {
 	GraphicsContext gc = canvas.getGraphicsContext2D();
 	Color lineColor = Color.BLACK;
 	Color fillColor = Color.YELLOW;
-	private double borderWidth = 1;
 
 	// Botones Barra Izquierda
 	ToggleButton selectionButton = new ToggleButton("Seleccionar");
@@ -76,6 +79,9 @@ public class PaintPane extends BorderPane {
 
 		layerChoiceBox.getItems().addAll("Layer 1", "Layer 2", "Layer 3");
 
+		borderSlider.setShowTickLabels(true);
+		borderSlider.setShowTickMarks(true);
+
 		canvas.setOnMousePressed(event -> {
 			startPoint = new Point(event.getX(), event.getY());
 		});
@@ -88,12 +94,13 @@ public class PaintPane extends BorderPane {
 			if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
 				return ;
 			}
-			MakeActionForFigure makeAction;
+			Figure newFigure = null;
 			if(rectangleButton.isSelected()) {
 				newFigure = new Rectangle(startPoint, endPoint);
 			}
 			else if(circleButton.isSelected()) {
-				makeAction = new MakeActionForCircle(startPoint, event, gc, canvasState, lineColor, fillColor, borderWidth);
+				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
+				newFigure = new Circle(startPoint, circleRadius);
 			} else if(squareButton.isSelected()) {
 				double size = Math.abs(endPoint.getX() - startPoint.getX());
 				newFigure = new Square(startPoint, size);
