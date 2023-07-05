@@ -44,6 +44,10 @@ public class PaintPane extends BorderPane {
 	Label fillLabel = new Label("Relleno");
 	ColorPicker fillColorPicker = new ColorPicker();
 
+	Label layerLabel = new Label("Capa");
+
+	ChoiceBox<String> layerChoiceBox = new ChoiceBox<>();
+	
 	// Dibujar una figura
 	Point startPoint;
 
@@ -65,11 +69,13 @@ public class PaintPane extends BorderPane {
 		}
 		VBox buttonsBox = new VBox(10);
 		buttonsBox.getChildren().addAll(toolsArr);
-		buttonsBox.getChildren().addAll(borderLabel, borderSlider, borderColorPicker, fillLabel, fillColorPicker);
+		buttonsBox.getChildren().addAll(borderLabel, borderSlider, borderColorPicker, fillLabel, fillColorPicker, layerLabel, layerChoiceBox);
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999");
 		buttonsBox.setPrefWidth(100);
 		gc.setLineWidth(1);
+
+		layerChoiceBox.getItems().addAll("Layer 1", "Layer 2", "Layer 3");
 
 		canvas.setOnMousePressed(event -> {
 			startPoint = new Point(event.getX(), event.getY());
