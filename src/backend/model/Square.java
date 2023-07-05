@@ -2,7 +2,7 @@ package backend.model;
 
 public abstract class Square extends Rectangle {
     private static final String TYPE = "Square";
-    public Square(String layer, Point topLeft, double size) {
+    public Square(Layer layer, Point topLeft, double size) {
         super(layer, topLeft, new Point(topLeft.getX() + size, topLeft.getY() + size));
         this.figureName=TYPE;
     }
