@@ -45,6 +45,14 @@ public class PaintPane extends BorderPane {
 
 	Label layerLabel = new Label("Capa");
 
+	Label variable1 = new Label();
+	Label variable2 = new Label();
+	Label variable3 = new Label();
+	Label variable4 = new Label();
+
+	ToggleButton deshacerButton = new ToggleButton("Deshacer");
+	ToggleButton rehacerButton = new ToggleButton("Rehacer");
+
 	ChoiceBox<Layer> layerChoiceBox = new ChoiceBox<>();
 
 	// Dibujar una figura
@@ -99,6 +107,17 @@ public class PaintPane extends BorderPane {
 		checkBox.setPrefWidth(600);
 		checkBox.setAlignment(Pos.CENTER);
 
+		HBox doUndo = new HBox();
+		Label[] variables1 = {variable1, variable2};
+		Label[] variables2 = {variable3, variable4};
+		ToggleButton[] Buttons = {deshacerButton, rehacerButton};
+		doUndo.getChildren().addAll(variables1);
+		doUndo.getChildren().addAll(Buttons);
+		doUndo.getChildren().addAll(variables2);
+		doUndo.setStyle("-fx-background-color: #999");
+		doUndo.setPrefHeight(35);
+		doUndo.setPrefWidth(600);
+		doUndo.setAlignment(Pos.CENTER);
 
 		layerChoiceBox.getItems().addAll(layer1, layer2, layer3); // Ver si se puede hacer algo mas generico, y no solo para 3 items
 
@@ -207,6 +226,7 @@ public class PaintPane extends BorderPane {
 			}
 		});
 
+		setTop(doUndo);
 		setLeft(buttonsBox);
 		setRight(canvas);
 		setBottom(checkBox);
