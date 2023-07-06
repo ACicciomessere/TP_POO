@@ -32,6 +32,8 @@ public class PaintPane extends BorderPane {
 	ToggleButton ellipseButton = new ToggleButton("Elipse");
 	ToggleButton deleteButton = new ToggleButton("Borrar");
 	ToggleButton copyFormat = new ToggleButton("Cop. Form.");
+	ToggleButton cutButton = new ToggleButton("Cut");
+	ToggleButton pasteButton = new ToggleButton("Paste");
 
 
 	// Botones para manipular la configuracion del borde y relleno
@@ -83,7 +85,7 @@ public class PaintPane extends BorderPane {
 		CheckBox layer3CheckBox = new CheckBox(layer3.getName());
 
 
-		ToggleButton[] toolsArr = {selectionButton, rectangleButton, circleButton, squareButton, ellipseButton, deleteButton, copyFormat};
+		ToggleButton[] toolsArr = {selectionButton, rectangleButton, circleButton, squareButton, ellipseButton, deleteButton, copyFormat, cutButton, pasteButton};
 		ToggleGroup tools = new ToggleGroup();
 		for (ToggleButton tool : toolsArr) {
 			tool.setMinWidth(90);
