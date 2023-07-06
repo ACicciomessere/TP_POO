@@ -1,15 +1,17 @@
 package backend.model;
 
+import backend.formatting.Move;
 import frontend.drawing.Drawing;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public abstract class Figure implements Drawing {
+public abstract class Figure implements Drawing, Move {
     protected String figureName;
     private Color fillingColor;
     private Color borderColor;
     private double borderWidth;
     private Layer layer;
+    public abstract void move(double diffX, double diffY);
     
     public abstract boolean pointBelongs(Point eventPoint);
     public abstract void fill(GraphicsContext gc);

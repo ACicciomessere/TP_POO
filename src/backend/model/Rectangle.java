@@ -21,7 +21,7 @@ public abstract class Rectangle extends Figure {
         return bottomRight;
     }
 
-    public void moveRectangle(double diffX, double diffY){
+    public void move(double diffX, double diffY){
         this.topLeft = new Point(topLeft.getX() + diffX, topLeft.getY() + diffY);
         this.bottomRight = new Point(bottomRight.getX() + diffX, bottomRight.getY() + diffY);
     }

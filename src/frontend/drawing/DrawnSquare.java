@@ -28,7 +28,7 @@ public class DrawnSquare extends Square {
         Point topLeft = getTopLeft();
         double size= getSize()/2;
         DrawnSquare ret = new DrawnSquare(layer, topLeft, getSize(), gc);
-        ret.moveRectangle(figureCenter.getX()-topLeft.getX()-size, figureCenter.getY()-getTopLeft().getY()-size);
+        ret.move(figureCenter.getX()-topLeft.getX()-size, figureCenter.getY()-getTopLeft().getY()-size);
         return ret;
     }
 }

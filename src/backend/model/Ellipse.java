@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 public abstract class Ellipse extends Figure {
 
     private static final String TYPE = "Ellipse";
-    private final Point centerPoint;
+    private Point centerPoint;
     private final double sMayorAxis, sMinorAxis;
 
     public Ellipse(Layer layer, Point centerPoint, double sMayorAxis, double sMinorAxis) {
@@ -14,6 +14,10 @@ public abstract class Ellipse extends Figure {
         this.sMayorAxis = sMayorAxis;
         this.sMinorAxis = sMinorAxis;
         this.figureName=TYPE;
+    }
+
+    public void move(double diffX, double diffY){
+        this.centerPoint= new Point (centerPoint.getX()+diffX, centerPoint.getY()+diffY);
     }
 
     @Override
