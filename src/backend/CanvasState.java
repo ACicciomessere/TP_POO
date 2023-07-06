@@ -19,6 +19,13 @@ public class CanvasState {
         layersFigures.get(layer).add(figure);
     }
 
+    public void addAction(Action action){
+        if(isRedoAvailable() != 0){
+            redo.clear();
+        }
+        this.undo.push(action);
+    }
+
     public Layer addCheckedLayer() {
         Layer aux = new Layer();
         checkedLayers.add(aux);
@@ -61,6 +68,14 @@ public class CanvasState {
             }
         }
         return toReturn;
+    }
+
+    public int isRedoAvailable(){
+        return redo.size();
+    }
+
+    public int isUndoAvailable(){
+        return undo.size();
     }
 }
 

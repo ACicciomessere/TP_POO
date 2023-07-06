@@ -1,6 +1,7 @@
 package frontend;
 
 import backend.CanvasState;
+import backend.formatting.*;
 import backend.model.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,6 +25,8 @@ public class PaintPane extends BorderPane {
 	Color lineColor = Color.BLACK;
 	Color fillColor = Color.YELLOW;
 
+	double lineWidth= 1;
+
 	// Botones Barra Izquierda
 	ToggleButton selectionButton = new ToggleButton("Seleccionar");
 	ToggleButton rectangleButton = new ToggleButton("Rectángulo");
@@ -40,10 +43,10 @@ public class PaintPane extends BorderPane {
 	Label borderLabel = new Label("Borde");
 	Slider borderSlider = new Slider(1, 50, 25);
 
-	ColorPicker borderColorPicker = new ColorPicker();
+	ColorPicker borderColorPicker = new ColorPicker(lineColor);
 
 	Label fillLabel = new Label("Relleno");
-	ColorPicker fillColorPicker = new ColorPicker();
+	ColorPicker fillColorPicker = new ColorPicker(fillColor);
 
 	Label layerLabel = new Label("Capa");
 
@@ -63,6 +66,9 @@ public class PaintPane extends BorderPane {
 
 	// Seleccionar una figura
 	Figure selectedFigure;
+
+	// Seleccionar una figura
+	Figure copiedFigure;
 
 	// StatusBar
 	StatusPane statusPane;
@@ -92,6 +98,8 @@ public class PaintPane extends BorderPane {
 			tool.setToggleGroup(tools);
 			tool.setCursor(Cursor.HAND);
 		}
+
+
 		VBox buttonsBox = new VBox(10);
 		buttonsBox.getChildren().addAll(toolsArr);
 		buttonsBox.getChildren().addAll(borderLabel, borderSlider, borderColorPicker, fillLabel, fillColorPicker, layerLabel, layerChoiceBox);
@@ -141,31 +149,30 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
-			if(startPoint == null) {
+			if(startPoint == null || startPoint.equals(endPoint)) {
 				return ;
 			}
 			if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
 				return ;
 			}
-			Figure newFigure = null;
+			MakeActionForFigure makeAction;
 			if(rectangleButton.isSelected()) {
-				newFigure = new Rectangle(layerChoiceBox.getValue(), startPoint, endPoint);
+				makeAction = new MakeActionForRectangle(startPoint, event, gc, canvasState, lineColor, fillColor, lineWidth);
+				makeAction.setLayer(layerChoiceBox.getValue());
 			}
 			else if(circleButton.isSelected()) {
-				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new Circle(layerChoiceBox.getValue(), startPoint, circleRadius);
+				makeAction = new MakeActionForCircle(startPoint, event, gc, canvasState, lineColor, fillColor, lineWidth);
+				makeAction.setLayer(layerChoiceBox.getValue());
 			} else if(squareButton.isSelected()) {
-				double size = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new Square(layerChoiceBox.getValue(), startPoint, size);
+				makeAction = new MakeActionForSquare(startPoint, event, gc, canvasState, lineColor, fillColor, lineWidth);
+				makeAction.setLayer(layerChoiceBox.getValue());
 			} else if(ellipseButton.isSelected()) {
-				Point centerPoint = new Point(Math.abs(endPoint.getX() + startPoint.getX()) / 2, (Math.abs((endPoint.getY() + startPoint.getY())) / 2));
-				double sMayorAxis = Math.abs(endPoint.getX() - startPoint.getX());
-				double sMinorAxis = Math.abs(endPoint.getY() - startPoint.getY());
-				newFigure = new Ellipse(layerChoiceBox.getValue(), centerPoint, sMayorAxis, sMinorAxis);
+				makeAction = new MakeActionForEllipse(startPoint, event, gc, canvasState, lineColor, fillColor, lineWidth);
+				makeAction.setLayer(layerChoiceBox.getValue());
 			} else {
 				return ;
 			}
-			canvasState.addFigure(layerChoiceBox.getValue(), newFigure);
+			canvasState.addAction(makeAction);
 			startPoint = null;
 			redrawCanvas();
 		});

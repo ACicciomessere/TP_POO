@@ -4,7 +4,15 @@ import backend.CanvasState;
 import backend.model.Layer;
 
 public abstract class MakeActionForFigure extends ActionAbsImpl{
-    public Layer layer;
+    protected Layer layer;
+
+    public Layer getLayer(){
+        return layer;
+    }
+
+    public void setLayer(Layer layer){
+        this.layer=layer;
+    }
 
     MakeActionForFigure(CanvasState canvasState){
         setCanvasState(canvasState);
