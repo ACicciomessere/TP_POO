@@ -1,4 +1,10 @@
-public class DeleteAction extends ActionAbsImpl{
+package backend.formatting;
+
+import backend.CanvasState;
+import backend.formatting.ActionAbsImpl;
+import backend.model.Figure;
+
+public class DeleteAction extends ActionAbsImpl {
   private Figure figure;
   private CanvasState canvasState;
 
@@ -15,5 +21,10 @@ public class DeleteAction extends ActionAbsImpl{
   @Override
   public void activateAction(){
     canvasState.deleteFigure(figure);
+  }
+
+  @Override
+  public String toString() {
+    return "Delete %s".formatted(manipulableFigure.getFigureName());
   }
 }
