@@ -3,7 +3,7 @@ package backend.formatting;
 import backend.CanvasState;
 import backend.model.Layer;
 
-public abstract class MakeActionForFigure extends FormattingActions{
+public abstract class MakeActionForFigure extends ActionAbsImpl{
     public Layer layer;
 
     MakeActionForFigure(CanvasState canvasState){

@@ -1,11 +1,21 @@
-public abstract class ActionAbsImpl includes Action{
-  private Figure figure;
+package backend.formatting;
 
-  public Figure(Figure figure){
-    this.figure = figure;
+import backend.CanvasState;
+import backend.formatting.Action;
+import backend.model.Figure;
+
+public abstract class ActionAbsImpl implements Action {
+  protected Figure manipulableFigure;
+  protected CanvasState canvasState;
+
+  public void setCanvasState(CanvasState canvasState){
+    this.canvasState=canvasState;
   }
-  
-  public abstract void undoAction();
-  public abstract void activateAction();
+
+  public void setManipulableFigure(Figure manipulableFigure) {
+    this.manipulableFigure = manipulableFigure;
+  }
+
+  public abstract String toString();
   
 }

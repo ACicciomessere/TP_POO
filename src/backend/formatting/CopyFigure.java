@@ -19,6 +19,7 @@ public class CopyFigure extends ActionAbsImpl {
     @Override
     public void activateAction() {
         this.copyFigure=manipulableFigure.duplicateFigure(canvasCenter);
+        this.copyFigure.formatFigure(manipulableFigure.getBorderColor(), manipulableFigure.getFillingColor(), manipulableFigure.getBorderWidth());
     }
 
     @Override
@@ -28,6 +29,6 @@ public class CopyFigure extends ActionAbsImpl {
 
     @Override
     public String toString() {
-        return "Se copia %s".formatted(manipulableFigure.getFigureName());
+        return "Copying %s".formatted(manipulableFigure.getFigureName());
     }
 }

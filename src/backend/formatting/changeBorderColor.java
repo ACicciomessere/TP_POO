@@ -1,29 +1,43 @@
 package backend.formatting;
 
+import backend.CanvasState;
 import backend.model.Figure;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 
-public class changeBorderColor implements ActionAbsImpl {
+public class changeBorderColor extends ActionForFormat {
     private final Color previousColor;
     private final Color nextColor;
 
-    public changeBorderColor(Figure figure, Color currentColor, Color nextColor) {
-        super(figure);
-        this.previousColor = previousColor;
+    public changeBorderColor(Figure figure, Color currentColor, Color nextColor, CanvasState canvasState) {
+        super(figure, currentColor, canvasState);
+        this.previousColor = currentColor;
         this.nextColor = nextColor;
         activateAction();  //cambio de color
     }
 
     @Override
     public void undoAction() {
-        figure.setBorderColor(previousColor); // No se si figure implementa el metodo de changeBorderColor
-        CanvasState.findFigure(figure).setBorderColor(previousColor);
+        changeColor(previousColor);
     }
 
     @Override
     public void activateAction(){
-        figure.setBorderColor(nextColor);
-        CanvasState.findFigure(figure).setBorderColor(nextColor);
+        manipulableFigure.setBorderColor(nextColor);
+        CanvasState.findFigure(manipulableFigure).setBorderColor(nextColor);
+    }
+
+    @Override
+    public void changeColor(Color color){
+        for( Figure figure : canvasState.figures()){
+            if(figure == manipulableFigure){
+                figure.setBorderColor(color);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "%s border".formatted(manipulableFigure.getFigureName());
     }
 }
