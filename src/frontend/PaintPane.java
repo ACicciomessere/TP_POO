@@ -120,7 +120,7 @@ public class PaintPane extends BorderPane {
 
 		HBox doUndo = new HBox();
 		Label[] varsIzquierda = {textoIzquierda, valorIzquierda};
-		Label[] varsDerecha = {textoDerecha, valorDerecha};
+		Label[] varsDerecha = {valorDerecha, textoDerecha};
 		ToggleButton[] Buttons = {deshacerButton, rehacerButton};
 		doUndo.getChildren().addAll(varsIzquierda);
 		doUndo.getChildren().addAll(Buttons);
