@@ -1,9 +1,16 @@
-public class CutAction extends CopyFigure{
+package backend.formatting;
+
+import backend.CanvasState;
+import backend.formatting.CopyFigure;
+import backend.formatting.DeleteAction;
+import backend.model.Figure;
+
+public class CutAction extends CopyFigure {
   private DeleteAction delete;
 
   public CutAction(Figure figure, CanvasState canvasState){
-    setCanvasState(canvasState);
     super(figure);
+    setCanvasState(canvasState);
     this.delete = new DeleteAction(figure, canvasState);
   }
   
