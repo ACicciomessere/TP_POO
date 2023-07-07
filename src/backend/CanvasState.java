@@ -75,46 +75,54 @@ public class CanvasState {
         return toReturn;
     }
 
-    public int isRedoAvailable(){
-        return redo.size();
+    public String UndoSize(){
+        return "%d".formatted(undo.size());
     }
 
-    public int isUndoAvailable(){
-        return undo.size();
+    public String RedoSize(){
+        return "%d".formatted(redo.size());
+    }
+
+    public boolean isRedoAvailable(){
+        return 0 < redo.size();
+    }
+
+    public boolean isUndoAvailable(){
+        return  0 < undo.size();
     }
 
     public Action getNextUndo() {
-        if (isUndoAvailable()!=0){
+        if (isUndoAvailable()){
             return undo.peek();
         }
         return null;
     }
 
     public Action getNextRedo() {
-        if (isRedoAvailable()!=0){
+        if (isRedoAvailable()){
             return redo.peek();
         }
         return null;
     }
 
-    public boolean undoAction() {
-        if(isUndoAvailable()!=0){
-            Action action=undo.pop();
-            action.undoAction();
-            redo.push(action);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean redoAction() {
-        if(isRedoAvailable()!=0){
-            Action action=redo.pop();
+    public Action undoAction() {
+        if(isUndoAvailable()){
+            Action action=undo.pollLast();
             action.activateAction();
             undo.push(action);
-            return true;
+            return action;
         }
-        return false;
+        return null;
+    }
+
+    public Action redoAction() {
+        if(isRedoAvailable()){
+            Action action=redo.pollLast();
+            action.activateAction();
+            undo.push(action);
+            return action;
+        }
+        return null;
     }
 }
 
