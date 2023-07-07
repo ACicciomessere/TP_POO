@@ -52,9 +52,9 @@ public class PaintPane extends BorderPane {
 
 	//Etiquetas con los nombres de las acciones y la cantidad de elementos que hay para hacer y deshacer
 	Label textoIzquierda = new Label();
-	Label valorIzquierda = new Label();
+	Label valorIzquierda = new Label("0");
 	Label textoDerecha = new Label();
-	Label valorDerecha = new Label();
+	Label valorDerecha = new Label("0");
 
 	ToggleButton deshacerButton = new ToggleButton("Deshacer");
 	ToggleButton rehacerButton = new ToggleButton("Rehacer");
@@ -235,6 +235,22 @@ public class PaintPane extends BorderPane {
 				redrawCanvas();
 			}
 		});
+
+		deshacerButton.setOnAction(event ->{
+            		Action UndoAction = canvasState.undoAction();
+            		if(UndoAction != null) {
+                		textoIzquierda.setText(UndoAction.toString());
+                		valorIzquierda.setText(canvasState.UndoSize());
+            		}
+        	});
+
+        	rehacerButton.setOnAction(event ->{
+            		Action RedoAction = canvasState.redoAction();
+            		if(RedoAction != null){
+                		textoDerecha.setText(RedoAction.toString());
+                		valorDerecha.setText(canvasState.RedoSize());
+            		}
+        	});
 
 		setTop(doUndo);
 		setLeft(buttonsBox);
