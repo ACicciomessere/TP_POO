@@ -53,6 +53,10 @@ public abstract class Figure {
         return this.borderWidth;
     }
 
+    public boolean figureBelongs(Figure figure, Point eventPoint) {
+        return figure.pointBelongs(eventPoint);
+    }
+
     public void setFormatFigure(Point eventPoint, Color borderColor, Color fillingColor, double width) {
         new CopyFormat(canvasState, this, eventPoint, borderColor, fillingColor, width);
         this.fillingColor = fillingColor;
