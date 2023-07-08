@@ -32,7 +32,7 @@ public class PaintPane extends BorderPane {
 	private static final int PADDING = 5;
 	private static final String FONT_SIZE = "-fx-font-size: 14";
 
-	// Botones Barra Izquierda
+	// Botones para realizar acciones
 	private final ToggleButton selectionButton = new ToggleButton("Seleccionar");
 	private final ToggleButton rectangleButton = new ToggleButton("Rectángulo");
 	private final ToggleButton circleButton = new ToggleButton("Círculo");
@@ -41,7 +41,7 @@ public class PaintPane extends BorderPane {
 	ToggleButton deleteButton = new ToggleButton("Borrar");
 	ToggleButton copyFormat = new ToggleButton("Cop. Form.");
 
-	private boolean added=true;
+	private boolean added = true;
 
 	// Botones para manipular la configuracion del borde y relleno
 	Label borderLabel = new Label("Borde");
@@ -54,19 +54,15 @@ public class PaintPane extends BorderPane {
 
 	Label layerLabel = new Label("Capa");
 
-	//Etiquetas con los nombres de las acciones y la cantidad de elementos que hay para hacer y deshacer
 	ToggleButton undoButton = new ToggleButton ("Deshacer");
 	ToggleButton redoButton = new ToggleButton("Rehacer");
 
 	private final ChoiceBox<Layer> layerChoiceBox = new ChoiceBox<>();
 
-	// Dibujar una figura
 	private Point startPoint;
 
-	// Seleccionar una figura
 	private Figure selectedFigure;
 
-	// StatusBar
 	StatusPane statusPane;
 
 	private Boolean newFormat = true;
@@ -88,7 +84,7 @@ public class PaintPane extends BorderPane {
 		this.statusPane = statusPane;
 
 		layer1 = canvasState.addCheckedLayer();
-		CheckBox layer1CheckBox = new CheckBox(layer1.getName()); //Revisar si se puede hacer mejor esto
+		CheckBox layer1CheckBox = new CheckBox(layer1.getName());
 
 		layer2 = canvasState.addCheckedLayer();
 		CheckBox layer2CheckBox = new CheckBox(layer2.getName());
@@ -124,7 +120,7 @@ public class PaintPane extends BorderPane {
 		checkBox.setPrefWidth(600);
 		checkBox.setAlignment(Pos.CENTER);
 
-		layerChoiceBox.getItems().addAll(layer1, layer2, layer3); // Ver si se puede hacer algo mas generico, y no solo para 3 items
+		layerChoiceBox.getItems().addAll(layer1, layer2, layer3);
 
 		HBox doButtonsBox = new HBox(BOX_SPACING);
 		doButtonsBox.setAlignment(Pos.CENTER);
@@ -157,8 +153,7 @@ public class PaintPane extends BorderPane {
 		setCursor(borderSlider);
 		setCursor(fillColorPicker);
 		setCursor(borderColorPicker);
-
-		//Array de layers en el que se actualiza al checkear un box
+		
 
 		layer1CheckBox.setOnAction(event -> handleCheckBoxAction(layer1CheckBox, layer1));
 		layer2CheckBox.setOnAction(event -> handleCheckBoxAction(layer2CheckBox, layer2));
