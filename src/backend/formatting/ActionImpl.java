@@ -4,8 +4,8 @@ import backend.CanvasState;
 import backend.model.Figure;
 
 public abstract class ActionImpl implements Action {
-  protected Figure figure;
-  protected CanvasState canvasState;
+  private final Figure figure;
+  private final CanvasState canvasState;
 
   public ActionImpl(CanvasState canvasState, Figure figure) {
     this.canvasState = canvasState;
@@ -19,9 +19,5 @@ public abstract class ActionImpl implements Action {
   public Figure getFigure() {
     return figure;
   }
-  public void setFigure(Figure figure){
-    this.figure = figure;
-  }
 
-  
 }
