@@ -29,9 +29,7 @@ public class ChangeLayer extends ActionImpl{
 
     @Override
     public void activateAction() {
-        System.out.println(getFigure().getLayer().getName());
         changeLayer(newLayer);
-        System.out.println(getFigure().getLayer().getName());
     }
 
     @Override
