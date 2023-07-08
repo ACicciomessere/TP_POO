@@ -1,14 +1,13 @@
 package backend.formatting;
 
 import backend.CanvasState;
-import backend.formatting.Action;
 import backend.model.Figure;
 
-public abstract class ActionAbsImpl implements Action {
+public abstract class ActionImpl implements Action {
   protected Figure figure;
   protected CanvasState canvasState;
 
-  public ActionAbsImpl(CanvasState canvasState, Figure figure) {
+  public ActionImpl(CanvasState canvasState, Figure figure) {
     this.canvasState = canvasState;
     this.figure = figure;
   }

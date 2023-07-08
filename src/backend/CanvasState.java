@@ -8,24 +8,73 @@ import java.util.*;
 
 public class CanvasState {
     private final Set<Layer> checkedLayers = new TreeSet<>(); // Coleccion para almacenar las layers
-    private static final Map<Layer, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
-    private final Deque<Figure> figures= new ArrayDeque<>();
-    private final Deque<Action> undo = new LinkedList<>(); //Lista para guardar las acciones anteriores
-    private final Deque<Action> redo = new LinkedList<>(); //Lista para re hacer lo deshecho
-    
+    private final Map<Layer, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
+
+    private final Deque<Action> undo = new ArrayDeque<>();
+    private final Deque<Action> redo = new ArrayDeque<>();
+
     public void addFigure(Layer layer, Figure figure) {
         if(layer == null) {
-            throw new IllegalArgumentException("Selecciona una capa"); // Aca hay que poner un alert de seleccionar una capa
-        } // En principio esto se puede sacar, pues no habria que validarlo
+            throw new IllegalArgumentException("Seleccione una capa");
+        }
         layersFigures.get(layer).add(figure);
-        figures.add(figure);
     }
 
-    public void addAction(Action action){
-        if(isRedoAvailable() != 0){
+    public boolean isRedoAvailable(){
+        return 0 < redo.size();
+    }
+
+    public void addUndo(Action action) {
+        if(isRedoAvailable()) {
             redo.clear();
         }
-        this.undo.push(action);
+        undo.push(action);
+    }
+
+    public boolean isUndoAvailable(){
+        return undo.size() > 0;
+    }
+
+    public Action getNextUndo() {
+        if (isUndoAvailable()){
+            return undo.peek();
+        }
+        return null;
+    }
+
+    public Action getNextRedo() {
+        if (isRedoAvailable()){
+            return redo.peek();
+        }
+        return null;
+    }
+
+    public boolean undoLastAction() {
+        if(isUndoAvailable()) {
+            Action action = undo.pop();
+            action.undoAction();
+            redo.push(action);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean redoLastAction() {
+        if(isRedoAvailable()){
+            Action action = redo.pop();
+            action.activateAction();
+            undo.push(action);
+            return true;
+        }
+        return false;
+    }
+
+    public int getRedoAvailable() {
+        return redo.size();
+    }
+
+    public int getUndoAvailable() {
+        return undo.size();
     }
 
     public Layer addCheckedLayer() {
@@ -39,10 +88,19 @@ public class CanvasState {
         layersFigures.get(figure.getLayer()).remove(figure);
     }
 
-    public Iterator<Figure> figuresDescending(){
-        return figures.descendingIterator();
+    public void activateLayer(Layer layer) {
+        if(checkedLayers.contains(layer)) {
+            layer.activate();
+        }
     }
-    public static Figure findFigure(Figure figure){
+
+    public void deactivateLayer(Layer layer) {
+        if(checkedLayers.contains(layer)) {
+            layer.deactivate();
+        }
+    }
+
+    public Figure findFigure(Figure figure){
         for(Layer layer : layersFigures.keySet()){
             for(int i = 0; i < layersFigures.get(layer).size(); i++){
                 if(layersFigures.get(layer).get(i).equals(figure)){
@@ -51,18 +109,6 @@ public class CanvasState {
             }
         }
         throw new NoSuchElementException("Figure not found");
-    }
-
-    public void activateLayer(Layer layer) {
-        if(checkedLayers.contains(layer)) {
-            layer.activate();
-        }
-    }
-    
-    public void deactivateLayer(Layer layer) {
-        if(checkedLayers.contains(layer)) {
-            layer.deactivate();
-        }
     }
 
     public Iterable<Figure> figures() {
@@ -75,46 +121,6 @@ public class CanvasState {
         return toReturn;
     }
 
-    public int isRedoAvailable(){
-        return redo.size();
-    }
-
-    public int isUndoAvailable(){
-        return undo.size();
-    }
-
-    public Action getNextUndo() {
-        if (isUndoAvailable()!=0){
-            return undo.peek();
-        }
-        return null;
-    }
-
-    public Action getNextRedo() {
-        if (isRedoAvailable()!=0){
-            return redo.peek();
-        }
-        return null;
-    }
-
-    public boolean undoAction() {
-        if(isUndoAvailable()!=0){
-            Action action=undo.pop();
-            action.undoAction();
-            redo.push(action);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean redoAction() {
-        if(isRedoAvailable()!=0){
-            Action action=redo.pop();
-            action.activateAction();
-            undo.push(action);
-            return true;
-        }
-        return false;
-    }
 }
+
 

@@ -4,11 +4,11 @@ import backend.CanvasState;
 import backend.model.Figure;
 import javafx.scene.paint.Color;
 
-public abstract class ActionForFormat extends ActionAbsImpl{
+public abstract class ChangeColor extends ActionImpl {
     private final Color newColor;
     private Color previousColor;
 
-    ActionForFormat(Figure selection, Color previousColor, Color newColor, CanvasState canvasState){
+    ChangeColor(Figure selection, Color previousColor, Color newColor, CanvasState canvasState){
         super(canvasState, selection);
         this.newColor=newColor;
         this.previousColor=previousColor;

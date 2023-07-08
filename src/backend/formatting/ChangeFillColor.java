@@ -4,35 +4,23 @@ import backend.CanvasState;
 import backend.model.Figure;
 import javafx.scene.paint.Color;
 
-public class ChangeFillColor extends ActionForFormat{
-
-    public ChangeFillColor(Figure selection, Color filling, CanvasState canvasState){
-        super(selection, filling, canvasState);
-    }
-
-
-    @Override
-    public void undoAction() {
-        changeColor(previousColor);
+public class ChangeFillColor extends ChangeColor {
+    public ChangeFillColor(Figure figure, Color newColor, CanvasState canvasState){
+        super(figure, figure.getFillingColor(), newColor, canvasState);
     }
 
     @Override
-    public void activateAction(){
-        previousColor = manipulableFigure.getFillingColor();
-        super.activateAction();
+    public void changeColor(Color color) {
+        getCanvasState().findFigure(getFigure()).setFillingColor(color);
     }
 
     @Override
-    public void changeColor(Color color){
-        for(Figure figure : canvasState.figures()){
-            if( figure == manipulableFigure){
-                figure.setFillingColor(color);
-            }
-        }
+    public Color getPreviousColor() {
+        return getFigure().getFillingColor();
     }
 
     @Override
     public String toString() {
-        return "%s filling".formatted(manipulableFigure.getFigureName());
+        return String.format("%s relleno de %s", super.toString(), getFigure().getFigureType());
     }
 }

@@ -7,52 +7,44 @@ import javafx.scene.paint.Color;
 
 import java.util.Iterator;
 
-public class CopyFormat extends ActionAbsImpl{
-
+public class CopyFormat extends ActionImpl {
     private final Color newBorderColor;
     private final Color newFillingColor;
-    private Color oldBorderColor;
-    private Color oldFillingColor;
-    private final Point point;
-    private double newBorderWidth;
-    private double oldBorderWidth;
-    private Figure aux;
+    private final double newBorderWidth;
+    private final Point eventPoint;
+    private Color previousBorderColor;
+    private Color previousFillingColor;
+    private double previousBorderWidth;
+    private Figure auxFigure;
 
-    public CopyFormat(Figure selection, CanvasState canvasState, Point point, Color newBorderColor, Color newFillingColor, double newBorderWidth){
-        setCanvasState(canvasState);
-        setManipulableFigure(selection);
-        this.newBorderColor=newBorderColor;
-        this.newFillingColor=newFillingColor;
-        this.newBorderWidth=newBorderWidth;
-        this.point=point;
+    public CopyFormat(CanvasState canvasState, Figure figure, Point eventPoint, Color newBorderColor, Color newFillingColor, double newBorderWidth) {
+        super(canvasState, figure);
+        for(Figure f : getCanvasState().figures()) {
+            if(f.pointBelongs(eventPoint)) {
+                this.auxFigure = f;
+            }
+        }
+        this.newBorderColor = newBorderColor;
+        this.newFillingColor = newFillingColor;
+        this.newBorderWidth = newBorderWidth;
+        this.eventPoint = eventPoint;
     }
 
+    @Override
     public void undoAction() {
-        for(Figure figure : canvasState.figures()){
-            if(figure== aux){
-                figure.formatFigure(oldBorderColor, oldFillingColor, oldBorderWidth);
-            }
-        }
+        getCanvasState().findFigure(auxFigure).setFormatFigure(eventPoint, previousBorderColor, previousFillingColor, previousBorderWidth);
     }
 
-    public void activateAction(){
-        Iterator<Figure> iterator = canvasState.figures().iterator();
-        while (iterator.hasNext()){
-            Figure figure = iterator.next();
-            if(figure.pointBelongs(point)){
-                aux= figure;
-                oldBorderColor=figure.getBorderColor();
-                oldFillingColor=figure.getFillingColor();
-                oldBorderWidth=figure.getBorderWidth();
-                figure.formatFigure(newBorderColor, newFillingColor, newBorderWidth);
-                return;
-            }
-        }
+    @Override
+    public void activateAction() {
+        this.previousBorderColor = auxFigure.getBorderColor();
+        this.previousBorderWidth = auxFigure.getBorderWidth();
+        this.previousFillingColor = auxFigure.getFillingColor();
+        auxFigure.setFormatFigure(eventPoint, newBorderColor, newFillingColor, newBorderWidth);
     }
-
 
     @Override
     public String toString() {
-        return "Copying %s format".formatted(manipulableFigure.getFigureName());
+        return String.format("Copiar Formato de %s", getFigure().getFigureType());
     }
 }
