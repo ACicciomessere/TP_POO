@@ -76,8 +76,9 @@ public class CanvasState {
         return undo.size();
     }
 
-    public Layer addCheckedLayer() {
-        layersFigures.put(new Layer(), new ArrayList<>());
+    public Layer addLayer() {
+        Layer aux= new Layer();
+        layersFigures.put(aux, new ArrayList<>());
         return aux;
     }
 

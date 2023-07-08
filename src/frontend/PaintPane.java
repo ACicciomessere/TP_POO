@@ -83,13 +83,13 @@ public class PaintPane extends BorderPane {
 		this.canvasState = canvasState;
 		this.statusPane = statusPane;
 
-		layer1 = canvasState.addCheckedLayer();
+		layer1 = canvasState.addLayer();
 		CheckBox layer1CheckBox = new CheckBox(layer1.getName());
 
-		layer2 = canvasState.addCheckedLayer();
+		layer2 = canvasState.addLayer();
 		CheckBox layer2CheckBox = new CheckBox(layer2.getName());
 
-		layer3 = canvasState.addCheckedLayer();
+		layer3 = canvasState.addLayer();
 		CheckBox layer3CheckBox = new CheckBox(layer3.getName());
 
 
@@ -223,7 +223,7 @@ public class PaintPane extends BorderPane {
 
 		borderColorPicker.setOnAction(event -> {
 			Color newColor = borderColorPicker.getValue();
-			if (selectedFigure != null) {
+			if(selectedFigure!=null){
 				Action changeBorderColorAction = new ChangeBorderColor(selectedFigure, newColor, canvasState);
 				changeBorderColorAction.activateAction();
 				canvasState.addUndo(changeBorderColorAction);
@@ -270,13 +270,14 @@ public class PaintPane extends BorderPane {
 
 		fillColorPicker.setOnAction(event -> {
 			fillColor = fillColorPicker.getValue();
-			if (selectedFigure != null) {
+			if(selectedFigure!=null){
 				Action changeFillAction = new ChangeFillColor(selectedFigure, fillColor, canvasState);
 				changeFillAction.activateAction();
 				canvasState.addUndo(changeFillAction);
 				selectedFigure = null;
 				redrawCanvas();
 			}
+
 		});
 
 
@@ -285,7 +286,7 @@ public class PaintPane extends BorderPane {
 			boolean found = false;
 			StringBuilder label = new StringBuilder();
 			for(Figure figure : canvasState.figures()) {
-				if(figureBelongs(figure, eventPoint)) {
+				if(figure.figureBelongs(figure, eventPoint)) {
 					found = true;
 					label.append(figure);
 				}
@@ -303,7 +304,7 @@ public class PaintPane extends BorderPane {
 				boolean found = false;
 				StringBuilder label = new StringBuilder("Se seleccionó: ");
 				for (Figure figure : canvasState.figures()) {
-					if(figureBelongs(figure, eventPoint)) {
+					if(figure.figureBelongs(figure, eventPoint)) {
 						found = true;
 						selectedFigure = figure;
 						label.append(figure);
@@ -342,13 +343,22 @@ public class PaintPane extends BorderPane {
 		});
 
 		deleteButton.setOnAction(event -> {
-			if (selectedFigure != null) {
-				Action deleteAction = new DeleteFigure(canvasState, selectedFigure);
+			boolean changed=true;
+			Action deleteAction=null;
+			try {
+				deleteAction = new DeleteFigure(canvasState, selectedFigure);
+			}
+			catch(IllegalArgumentException e){
+				throwWarning("Seleccione una figura para borrar");
+				changed=false;
+			}
+			if(changed) {
 				deleteAction.activateAction();
 				canvasState.addUndo(deleteAction);
 				selectedFigure = null;
 				redrawCanvas();
 			}
+
 		});
 
 		setTop(topButtonsBox);
@@ -394,10 +404,6 @@ public class PaintPane extends BorderPane {
 
 		undoLabel.setText(String.format("%s %d",canvasState.getNextUndo() == null ? "" : canvasState.getNextUndo().toString(), canvasState.getUndoAvailable()));
 		redoLabel.setText(String.format("%d %s", canvasState.getRedoAvailable(), canvasState.getNextRedo() == null ? "" : canvasState.getNextRedo().toString()));
-	}
-
-	private boolean figureBelongs(Figure figure, Point eventPoint) {
-		return figure.pointBelongs(eventPoint);
 	}
 }
 
