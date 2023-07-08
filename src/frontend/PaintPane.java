@@ -378,7 +378,7 @@ public class PaintPane extends BorderPane {
 		redrawCanvas();
 	}
 
-	public void redrawCanvas() {
+	private void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures()) {
 			if(figure == selectedFigure) {
