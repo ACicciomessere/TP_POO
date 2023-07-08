@@ -6,7 +6,7 @@ public class Layer implements Comparable<Layer> {
     private static final int INITIAL_LAYER = 1;
     private static int CURRENT_LAYER = INITIAL_LAYER;
     private final String name;
-    private boolean activated = false;
+    private boolean activated = true;
 
     public Layer() {
         this.name = "Layer " + CURRENT_LAYER++;

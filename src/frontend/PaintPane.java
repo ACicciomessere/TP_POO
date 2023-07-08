@@ -85,12 +85,15 @@ public class PaintPane extends BorderPane {
 
 		layer1 = canvasState.addLayer();
 		CheckBox layer1CheckBox = new CheckBox(layer1.getName());
+		layer1CheckBox.setSelected(true);
 
 		layer2 = canvasState.addLayer();
 		CheckBox layer2CheckBox = new CheckBox(layer2.getName());
+		layer2CheckBox.setSelected(true);
 
 		layer3 = canvasState.addLayer();
 		CheckBox layer3CheckBox = new CheckBox(layer3.getName());
+		layer3CheckBox.setSelected(true);
 
 
 		ToggleButton[] toolsArr = {selectionButton, rectangleButton, circleButton, squareButton, ellipseButton, deleteButton, copyFormat};
