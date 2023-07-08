@@ -7,7 +7,6 @@ import backend.model.Layer;
 import java.util.*;
 
 public class CanvasState {
-    private final Set<Layer> checkedLayers = new TreeSet<>(); // Coleccion para almacenar las layers
     private final Map<Layer, List<Figure>> layersFigures = new HashMap<>(); // El key es la layer, y el value son las figures de la layer
 
     private final Deque<Action> undo = new ArrayDeque<>();
@@ -78,9 +77,7 @@ public class CanvasState {
     }
 
     public Layer addCheckedLayer() {
-        Layer aux = new Layer();
-        checkedLayers.add(aux);
-        layersFigures.put(aux, new ArrayList<>());
+        layersFigures.put(new Layer(), new ArrayList<>());
         return aux;
     }
 
@@ -89,13 +86,13 @@ public class CanvasState {
     }
 
     public void activateLayer(Layer layer) {
-        if(checkedLayers.contains(layer)) {
+        if(layersFigures.containsKey(layer)) {
             layer.activate();
         }
     }
 
     public void deactivateLayer(Layer layer) {
-        if(checkedLayers.contains(layer)) {
+        if(layersFigures.containsKey(layer)) {
             layer.deactivate();
         }
     }
@@ -113,7 +110,7 @@ public class CanvasState {
 
     public Iterable<Figure> figures() {
         List<Figure> toReturn = new ArrayList<>();
-        for(Layer layer : checkedLayers) {
+        for(Layer layer : layersFigures.keySet()) {
             if(layer.isActivated()) {
                 toReturn.addAll(layersFigures.get(layer));
             }
