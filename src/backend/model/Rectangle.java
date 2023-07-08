@@ -1,21 +1,19 @@
-
 package backend.model;
 
-        import javafx.scene.canvas.GraphicsContext;
+import backend.CanvasState;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
-public abstract class Rectangle extends Figure {
+public class Rectangle extends Figure {
 
-    private Point topLeft, bottomRight;
+    private final Point topLeft, bottomRight;
 
-    public Rectangle(Layer layer, Point topLeft, Point bottomRight) {
-        super(layer);
+    public Rectangle(Layer layer, Point topLeft, Point bottomRight, Color filling, Color borderColor, double width, CanvasState canvasState) {
+        super(layer, filling, borderColor, width, canvasState);
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }
-    public void move(double diffX, double diffY){
-        this.topLeft = new Point(topLeft.getX() + diffX, topLeft.getY() + diffY);
-        this.bottomRight = new Point(bottomRight.getX() + diffX, bottomRight.getY() + diffY);
-    }
+
     public Point getTopLeft() {
         return topLeft;
     }
@@ -42,8 +40,6 @@ public abstract class Rectangle extends Figure {
                 Math.abs(getTopLeft().getX() - getBottomRight().getX()), Math.abs(getTopLeft().getY() - getBottomRight().getY()));
     }
 
-
-
     @Override
     public void updateCoordinates(double diffX, double diffY) {
         getTopLeft().changeX(diffX);
@@ -55,5 +51,9 @@ public abstract class Rectangle extends Figure {
     @Override
     public String toString() {
         return String.format("Rectángulo [ %s , %s ]", topLeft, bottomRight);
+    }
+
+    public String getFigureType() {
+        return "Rectángulo";
     }
 }

@@ -1,23 +1,21 @@
 
 package backend.model;
+import backend.CanvasState;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
-        import javafx.scene.canvas.GraphicsContext;
+public class Ellipse extends Figure {
 
-public abstract class Ellipse extends Figure {
-
-    private Point centerPoint;
+    private final Point centerPoint;
     private final double sMayorAxis, sMinorAxis;
 
-    public Ellipse(Layer layer, Point centerPoint, double sMayorAxis, double sMinorAxis) {
-        super(layer);
+    public Ellipse(Layer layer, Point centerPoint, double sMayorAxis, double sMinorAxis, Color filling, Color borderColor, double width, CanvasState canvasState) {
+        super(layer, filling, borderColor, width, canvasState);
         this.centerPoint = centerPoint;
         this.sMayorAxis = sMayorAxis;
         this.sMinorAxis = sMinorAxis;
     }
 
-    public void move(double diffX, double diffY){
-        this.centerPoint= new Point (centerPoint.getX()+diffX, centerPoint.getY()+diffY);
-    }
     @Override
     public String toString() {
         return String.format("Elipse [Centro: %s, DMayor: %.2f, DMenor: %.2f]", centerPoint, sMayorAxis, sMinorAxis);
@@ -57,5 +55,7 @@ public abstract class Ellipse extends Figure {
         return sMinorAxis;
     }
 
+    public String getFigureType() {
+        return "Elipse";
+    }
 }
-

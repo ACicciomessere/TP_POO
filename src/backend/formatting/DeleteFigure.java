@@ -4,9 +4,6 @@ import backend.CanvasState;
 import backend.model.Figure;
 
 public class DeleteFigure extends ActionImpl {
-  private Figure figure;
-  private CanvasState canvasState;
-
   public DeleteFigure(CanvasState canvasState, Figure figure) {
     super(canvasState, figure);
   }

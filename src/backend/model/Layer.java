@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Layer implements Comparable<Layer> {
     private static final int INITIAL_LAYER = 1;
     private static int CURRENT_LAYER = INITIAL_LAYER;
-    private String name;
+    private final String name;
     private boolean activated = false;
 
     public Layer() {
@@ -55,3 +55,4 @@ public class Layer implements Comparable<Layer> {
         return this.name;
     }
 }
+

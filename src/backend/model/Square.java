@@ -1,15 +1,11 @@
 package backend.model;
 
-public abstract class Square extends Rectangle {
-    private static final String TYPE = "Square";
-    private final double size;
-    public Square(Layer layer, Point topLeft, double size) {
-        super(layer, topLeft, new Point(topLeft.getX() + size, topLeft.getY() + size));
-        this.size=size;
-    }
+import backend.CanvasState;
+import javafx.scene.paint.Color;
 
-    public double getSize(){
-        return size;
+public class Square extends Rectangle {
+    public Square(Layer layer, Point topLeft, double size, Color filling, Color borderColor, double width, CanvasState canvasState) {
+        super(layer, topLeft, new Point(topLeft.getX() + size, topLeft.getY() + size), filling, borderColor, width, canvasState);
     }
 
     @Override
@@ -17,6 +13,8 @@ public abstract class Square extends Rectangle {
         return String.format("Cuadrado [ %s , %s ]", getTopLeft(), getBottomRight());
     }
 
-
-
+    public String getFigureType() {
+        return "Cuadrado";
+    }
 }
+

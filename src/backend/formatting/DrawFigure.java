@@ -2,7 +2,6 @@ package backend.formatting;
 
 import backend.CanvasState;
 import backend.model.Figure;
-import backend.model.Layer;
 
 public class DrawFigure extends ActionImpl {
     public DrawFigure(CanvasState canvasState, Figure figure) {

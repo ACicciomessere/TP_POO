@@ -5,7 +5,6 @@ import backend.model.Figure;
 import backend.model.Point;
 import javafx.scene.paint.Color;
 
-import java.util.Iterator;
 
 public class CopyFormat extends ActionImpl {
     private final Color newBorderColor;

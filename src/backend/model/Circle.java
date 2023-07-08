@@ -1,10 +1,13 @@
 package backend.model;
 
-public abstract class Circle extends Ellipse {
+import backend.CanvasState;
+import javafx.scene.paint.Color;
+
+public class Circle extends Ellipse {
     private final double radius;
 
-    public Circle(Layer layer, Point centerPoint, double radius) {
-        super(layer, centerPoint, 2 * radius, 2 * radius); // Revisar si esto esta bien
+    public Circle(Layer layer, Point centerPoint, double radius, Color filling, Color borderColor, double width, CanvasState canvasState) {
+        super(layer, centerPoint, 2 * radius, 2 * radius, filling, borderColor, width, canvasState);
         this.radius = radius;
     }
 
@@ -21,5 +24,9 @@ public abstract class Circle extends Ellipse {
 
     public double getRadius() {
         return radius;
+    }
+
+    public String getFigureType() {
+        return "Circulo";
     }
 }
