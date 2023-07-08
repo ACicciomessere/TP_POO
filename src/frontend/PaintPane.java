@@ -311,6 +311,7 @@ public class PaintPane extends BorderPane {
 						found = true;
 						selectedFigure = figure;
 						label.append(figure);
+						layerChoiceBox.setValue(selectedFigure.getLayer());
 					}
 				}
 				if (found) {
@@ -328,6 +329,19 @@ public class PaintPane extends BorderPane {
 					copyFormat.activateAction();
 					canvasState.addUndo(copyFormat);
 					newFormat = false;
+				}
+			}
+			redrawCanvas();
+		});
+
+		layerChoiceBox.setOnAction(event -> {
+			if(selectionButton.isSelected()){
+				if(selectedFigure!=null){
+						if(layerChoiceBox.getValue()!=selectedFigure.getLayer()) {
+							Action changeLayer = new ChangeLayer(canvasState, selectedFigure, layerChoiceBox.getValue());
+							changeLayer.activateAction();
+							canvasState.addUndo(changeLayer);
+						}
 				}
 			}
 			redrawCanvas();

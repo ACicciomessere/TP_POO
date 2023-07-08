@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 
 public abstract class Figure {
-    private final Layer layer;
+    private Layer layer;
     private Color fillingColor;
     private Color borderColor;
     private double borderWidth;
@@ -23,6 +23,10 @@ public abstract class Figure {
     }
     public Layer getLayer() {
         return this.layer;
+    }
+
+    public void setLayer(Layer layer){
+        this.layer=layer;
     }
 
     public Color getFillingColor() {
