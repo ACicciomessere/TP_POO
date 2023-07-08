@@ -6,7 +6,6 @@ public abstract class Square extends Rectangle {
     public Square(Layer layer, Point topLeft, double size) {
         super(layer, topLeft, new Point(topLeft.getX() + size, topLeft.getY() + size));
         this.size=size;
-        this.figureName=TYPE;
     }
 
     public double getSize(){
@@ -17,6 +16,7 @@ public abstract class Square extends Rectangle {
     public String toString() {
         return String.format("Cuadrado [ %s , %s ]", getTopLeft(), getBottomRight());
     }
+
 
 
 }

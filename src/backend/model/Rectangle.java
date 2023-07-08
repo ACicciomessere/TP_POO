@@ -1,29 +1,27 @@
+
 package backend.model;
 
-import javafx.scene.canvas.GraphicsContext;
+        import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Rectangle extends Figure {
 
     private Point topLeft, bottomRight;
-    private static final String TYPE = "Rectangle";
+
     public Rectangle(Layer layer, Point topLeft, Point bottomRight) {
         super(layer);
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
-        this.figureName=TYPE;
     }
-
+    public void move(double diffX, double diffY){
+        this.topLeft = new Point(topLeft.getX() + diffX, topLeft.getY() + diffY);
+        this.bottomRight = new Point(bottomRight.getX() + diffX, bottomRight.getY() + diffY);
+    }
     public Point getTopLeft() {
         return topLeft;
     }
 
     public Point getBottomRight() {
         return bottomRight;
-    }
-
-    public void move(double diffX, double diffY){
-        this.topLeft = new Point(topLeft.getX() + diffX, topLeft.getY() + diffY);
-        this.bottomRight = new Point(bottomRight.getX() + diffX, bottomRight.getY() + diffY);
     }
 
     @Override
@@ -44,6 +42,8 @@ public abstract class Rectangle extends Figure {
                 Math.abs(getTopLeft().getX() - getBottomRight().getX()), Math.abs(getTopLeft().getY() - getBottomRight().getY()));
     }
 
+
+
     @Override
     public void updateCoordinates(double diffX, double diffY) {
         getTopLeft().changeX(diffX);
@@ -56,5 +56,4 @@ public abstract class Rectangle extends Figure {
     public String toString() {
         return String.format("Rectángulo [ %s , %s ]", topLeft, bottomRight);
     }
-
 }

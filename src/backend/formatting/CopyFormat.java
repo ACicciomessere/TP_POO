@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 import java.util.Iterator;
 
-public class FormatCopyAction extends ActionAbsImpl{
+public class CopyFormat extends ActionAbsImpl{
 
     private final Color newBorderColor;
     private final Color newFillingColor;
@@ -18,7 +18,7 @@ public class FormatCopyAction extends ActionAbsImpl{
     private double oldBorderWidth;
     private Figure aux;
 
-    public FormatCopyAction(Figure selection, CanvasState canvasState, Point point, Color newBorderColor, Color newFillingColor, double newBorderWidth){
+    public CopyFormat(Figure selection, CanvasState canvasState, Point point, Color newBorderColor, Color newFillingColor, double newBorderWidth){
         setCanvasState(canvasState);
         setManipulableFigure(selection);
         this.newBorderColor=newBorderColor;

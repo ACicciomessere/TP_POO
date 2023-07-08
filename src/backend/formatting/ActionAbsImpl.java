@@ -5,17 +5,24 @@ import backend.formatting.Action;
 import backend.model.Figure;
 
 public abstract class ActionAbsImpl implements Action {
-  protected Figure manipulableFigure;
+  protected Figure figure;
   protected CanvasState canvasState;
 
-  public void setCanvasState(CanvasState canvasState){
-    this.canvasState=canvasState;
+  public ActionAbsImpl(CanvasState canvasState, Figure figure) {
+    this.canvasState = canvasState;
+    this.figure = figure;
   }
 
-  public void setManipulableFigure(Figure manipulableFigure) {
-    this.manipulableFigure = manipulableFigure;
+  public CanvasState getCanvasState() {
+    return canvasState;
   }
 
-  public abstract String toString();
+  public Figure getFigure() {
+    return figure;
+  }
+  public void setFigure(Figure figure){
+    this.figure = figure;
+  }
+
   
 }

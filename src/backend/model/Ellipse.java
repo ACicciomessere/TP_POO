@@ -1,10 +1,10 @@
+
 package backend.model;
 
-import javafx.scene.canvas.GraphicsContext;
+        import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Ellipse extends Figure {
 
-    private static final String TYPE = "Ellipse";
     private Point centerPoint;
     private final double sMayorAxis, sMinorAxis;
 
@@ -13,13 +13,11 @@ public abstract class Ellipse extends Figure {
         this.centerPoint = centerPoint;
         this.sMayorAxis = sMayorAxis;
         this.sMinorAxis = sMinorAxis;
-        this.figureName=TYPE;
     }
 
     public void move(double diffX, double diffY){
         this.centerPoint= new Point (centerPoint.getX()+diffX, centerPoint.getY()+diffY);
     }
-
     @Override
     public String toString() {
         return String.format("Elipse [Centro: %s, DMayor: %.2f, DMenor: %.2f]", centerPoint, sMayorAxis, sMinorAxis);
@@ -60,3 +58,4 @@ public abstract class Ellipse extends Figure {
     }
 
 }
+

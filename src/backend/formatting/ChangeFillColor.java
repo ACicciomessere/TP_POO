@@ -4,9 +4,9 @@ import backend.CanvasState;
 import backend.model.Figure;
 import javafx.scene.paint.Color;
 
-public class ChangeFillAction extends ActionForFormat{
+public class ChangeFillColor extends ActionForFormat{
 
-    public ChangeFillAction(Figure selection, Color filling, CanvasState canvasState){
+    public ChangeFillColor(Figure selection, Color filling, CanvasState canvasState){
         super(selection, filling, canvasState);
     }
 
